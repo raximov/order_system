@@ -2,15 +2,6 @@
 
 A real, local-first RabbitMQ microservices project for learning producer/consumer flows, routing, and event-driven communication.
 
-## Where should you run this project?
-
-Short answer: **run it on your own machine (locally)**.
-
-- ✅ **Local machine (recommended):** fully supported with Docker Desktop (or Docker Engine + Compose plugin).
-- ⚠️ **This chat execution environment:** code is created here, but Docker is not available, so the full stack cannot be started here.
-
-So you should clone/copy this repo to your laptop/server and run it locally.
-
 ## Architecture
 
 This project has 3 services communicating via RabbitMQ:
@@ -35,16 +26,6 @@ RabbitMQ Management UI is available for inspection/debugging.
 - pika (RabbitMQ client)
 - Docker + Docker Compose
 
-## Prerequisites (local)
-
-1. Install Docker Desktop (Mac/Windows) or Docker Engine (Linux).
-2. Verify Docker and Compose are available:
-
-```bash
-docker --version
-docker compose version
-```
-
 ## Run locally
 
 ### 1) Start everything
@@ -59,19 +40,7 @@ docker compose up --build -d
 docker compose ps
 ```
 
-### 3) Health check API
-
-```bash
-curl http://localhost:8000/health
-```
-
-Expected response:
-
-```json
-{"status":"ok"}
-```
-
-### 4) Create an order
+### 3) Create an order
 
 ```bash
 curl -X POST http://localhost:8000/orders \
@@ -79,7 +48,7 @@ curl -X POST http://localhost:8000/orders \
   -d '{"customer_email":"alice@example.com","amount":149.99,"currency":"USD"}'
 ```
 
-### 5) Watch async processing logs
+### 4) Watch async processing logs
 
 ```bash
 docker compose logs -f payment-service notification-service
@@ -105,16 +74,6 @@ Explore:
 ```bash
 docker compose down
 ```
-
-## Troubleshooting
-
-- If a service keeps restarting, run:
-
-```bash
-docker compose logs -f order-service payment-service notification-service rabbitmq
-```
-
-- If port `5672`, `15672`, or `8000` is busy, stop conflicting apps or change mapped ports in `docker-compose.yml`.
 
 ## Learning exercises
 
